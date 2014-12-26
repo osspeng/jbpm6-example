@@ -1,0 +1,42 @@
+//created on: Oct 12, 2014
+package tw.org.narl.procurement.drools;
+
+//list any import classes here.
+import tw.org.narl.common.model.Stage;
+import tw.org.narl.common.model.Form;
+import tw.org.narl.common.model.Approver;
+import com.redhat.prj.narl.api.purchase.NarlRole;
+
+//declare any global variables here
+
+rule "Stage4-1"
+	ruleflow-group "director"
+    when
+        form : Form(price > 1000000)
+    then
+		System.out.println("fire Stage4-1 副主任!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getVd_02010000());
+        
+		stage.setStageId("4-1");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "Stage4-2"
+	ruleflow-group "director"
+    when
+        form : Form(price > 10000000)
+    then
+		System.out.println("fire Stage4-2 主任!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getDirector_02010000());
+        
+		stage.setStageId("4-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end

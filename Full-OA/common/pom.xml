@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>tw.org.narl</groupId>
+  <artifactId>common</artifactId>
+  <version>1.0</version>
+  <packaging>kjar</packaging>
+  <name>common</name>
+  <description>Common Processes and Models shared among all Domain processes
+include:
+1.Common processes
+2.Common models</description>
+  <repositories>
+    <repository>
+      <id>guvnor-m2-repo</id>
+      <name>Guvnor M2 Repo</name>
+      <url>http://localhost:8080/business-central/maven2/</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>6.0.3-redhat-6</version>
+        <extensions>true</extensions>
+        <dependencies>
+          <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-bpmn2</artifactId>
+            <version>6.0.3-redhat-6</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

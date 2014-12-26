@@ -1,0 +1,43 @@
+//created on: Oct 12, 2014
+package tw.org.narl.procurement.drools;
+
+//list any import classes here.
+import tw.org.narl.common.model.Stage;
+import tw.org.narl.common.model.Form;
+import tw.org.narl.common.model.Approver;
+import com.redhat.prj.narl.api.purchase.NarlRole;
+
+//declare any global variables here
+
+rule "Stage2-1"
+	ruleflow-group "BC"
+    when
+        form : Form()
+    then
+		System.out.println("fire Stage2-1 組室!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(NarlRole.getDeptRole(form.getApplicanRole()));
+        
+		stage.setStageId("2-1");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "Stage2-2"
+	ruleflow-group "BC"
+    when
+        form : Form()
+    then
+		System.out.println("fire Stage2-2 計畫預控!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(NarlRole.getBCRole(form.getPlanRole()));
+        
+		stage.setStageId("2-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+

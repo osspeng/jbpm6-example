@@ -1,0 +1,65 @@
+//created on: Oct 12, 2014
+package tw.org.narl.procurement.drools;
+
+//list any import classes here.
+import tw.org.narl.common.model.Stage;
+import tw.org.narl.common.model.Form;
+import tw.org.narl.common.model.Approver;
+import com.redhat.prj.narl.api.purchase.NarlRole;
+
+//declare any global variables here
+
+rule "Stage10-1"
+	ruleflow-group "FIN"
+    when
+        form : Form(price > 10000)
+    then
+		System.out.println("fire Stage10-1 院駐點會計人員+院駐點會計主管!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getFinRoleId());
+        
+		stage.setStageId("10-1-1");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+		
+		approver = new Approver();
+        approver.setRoleId(form.getFin_mgr());
+        
+		stage.setStageId("10-1-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "Stage10-2"
+	ruleflow-group "FIN"
+    when
+        form : Form(price > 10000000)
+    then
+		System.out.println("fire Stage10-2 院本部財務會計室主任!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getDirector_01110000());
+        
+		stage.setStageId("10-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "FinStage23"
+	ruleflow-group "FIN23"
+    when
+        form : Form()
+    then
+		System.out.println("fire FinStage23 院駐點會計人員!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getFinRoleId());
+        
+		stage.setStageId("FinStage23");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end

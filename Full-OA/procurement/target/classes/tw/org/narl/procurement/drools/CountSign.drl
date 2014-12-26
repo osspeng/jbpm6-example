@@ -1,0 +1,86 @@
+//created on: Oct 12, 2014
+package tw.org.narl.procurement.drools;
+
+//list any import classes here.
+import tw.org.narl.common.model.Stage;
+import tw.org.narl.common.model.Form;
+import tw.org.narl.common.model.Approver;
+
+//declare any global variables here
+
+
+rule "CounterSign-1"
+	ruleflow-group "CounterSign12"
+    when
+        form : Form(countersignid1 != null, countersignid1 != "")
+    then
+		System.out.println("fire CounterSign1!");
+        Stage stage = new Stage();
+        Approver approver = new Approver();
+        approver.setRoleId(form.getCountersignid1());
+        
+		stage.setStageId("1-1");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "CounterSign-2"
+    ruleflow-group "CounterSign12"
+    when
+        form : Form(countersignid2 != null, countersignid2 != "")
+    then
+        System.out.println("fire CounterSign2!");
+        Stage stage = new Stage();
+		Approver approver = new Approver();
+		approver.setRoleId(form.getCountersignid2());
+		stage.setStageId("1-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "CounterSign-3"
+    ruleflow-group "CounterSign345"
+    when
+        form : Form(countersignId3 != null, countersignId3 != "")
+    then
+        System.out.println("fire CounterSign3!");
+        Stage stage = new Stage();
+		Approver approver = new Approver();
+		approver.setRoleId(form.getCountersignId3());
+		stage.setStageId("6-1");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "CounterSign-4"
+    ruleflow-group "CounterSign345"
+    when
+        form : Form(countersignId4 != null, countersignId4 != "")
+    then
+        System.out.println("fire CounterSign4!");
+        Stage stage = new Stage();
+		Approver approver = new Approver();
+		approver.setRoleId(form.getCountersignId4());
+		stage.setStageId("6-2");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
+
+rule "CounterSign-5"
+    ruleflow-group "CounterSign345"
+    when
+        form : Form(countersignId5 != null, countersignId5 != "")
+    then
+        System.out.println("fire CounterSign5!");
+        Stage stage = new Stage();
+		Approver approver = new Approver();
+		approver.setRoleId(form.getCountersignId5());
+		stage.setStageId("6-3");
+		stage.setApprover(approver);
+		form.getStageList().add(stage);
+
+end
